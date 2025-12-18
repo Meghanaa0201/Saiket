@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog App - Saiket Systems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .form-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: inherit;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .posts-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .post-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .post-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .post-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .post-card p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .post-date {
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        .no-posts {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-size: 1.1em;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        .hashtags {
+            color: #667eea;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 Simple Blog App</h1>
+            <p>Saiket Systems - Internship Program</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Task 3: Blog with Local Storage</p>
+        </div>
+
+        <div class="content">
+            <!-- Create Post Form -->
+            <div class="form-section">
+                <h2>Create New Post</h2>
+                <form id="postForm">
+                    <div class="form-group">
+                        <label for="postTitle">Title</label>
+                        <input type="text" id="postTitle" placeholder="Enter post title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Content</label>
+                        <textarea id="postContent" placeholder="Write your blog post here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Publish Post</button>
+                </form>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <h3>📊 Total Posts: <span id="postCount">0</span></h3>
+            </div>
+
+            <!-- Posts Display -->
+            <div class="posts-section">
+                <h2>All Blog Posts</h2>
+                <div id="postsContainer">
+                    <div class="no-posts">No posts yet. Create your first post above!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2024 Saiket Systems - Internship Program</p>
+            <p class="hashtags">#SaiKetSystemsJourney #SaiKetExperience #FutureWithSaiKet</p>
+        </div>
+    </div>
+
+    <script>
+        // Blog App JavaScript - Student Implementation
+        class BlogApp {
+            constructor() {
+                this.posts = this.loadPosts();
+                this.init();
+            }
+
+            init() {
+                this.renderPosts();
+                this.updateStats();
+                document.getElementById('postForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.createPost();
+                });
+            }
+
+            // Load posts from localStorage
+            loadPosts() {
+                const posts = localStorage.getItem('blogPosts');
+                return posts ? JSON.parse(posts) : [];
+            }
+
+            // Save posts to localStorage
+            savePosts() {
+                localStorage.setItem('blogPosts', JSON.stringify(this.posts));
+            }
+
+            // Create new post
+            createPost() {
+                const title = document.getElementById('postTitle').value.trim();
+                const content = document.getElementById('postContent').value.trim();
+
+                if (!title || !content) {
+                    alert('Please fill in all fields!');
+                    return;
+                }
+
+                const post = {
+                    id: Date.now(),
+                    title: title,
+                    content: content,
+                    date: new Date().toLocaleString()
+                };
+
+                this.posts.unshift(post);
+                this.savePosts();
+                this.renderPosts();
+                this.updateStats();
+
+                // Clear form
+                document.getElementById('postForm').reset();
+                
+                // Show success message
+                alert('✅ Post published successfully!');
+            }
+
+            // Delete post
+            deletePost(id) {
+                if (confirm('Are you sure you want to delete this post?')) {
+                    this.posts = this.posts.filter(post => post.id !== id);
+                    this.savePosts();
+                    this.renderPosts();
+                    this.updateStats();
+                }
+            }
+
+            // Render all posts
+            renderPosts() {
+                const container = document.getElementById('postsContainer');
+
+                if (this.posts.length === 0) {
+                    container.innerHTML = '<div class="no-posts">No posts yet. Create your first post above!</div>';
+                    return;
+                }
+
+                container.innerHTML = this.posts.map(post => `
+                    <div class="post-card">
+                        <h3>${this.escapeHtml(post.title)}</h3>
+                        <p>${this.escapeHtml(post.content)}</p>
+                        <div class="post-meta">
+                            <span class="post-date">📅 ${post.date}</span>
+                            <button class="delete-btn" onclick="blogApp.deletePost(${post.id})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Update statistics
+            updateStats() {
+                document.getElementById('postCount').textContent = this.posts.length;
+            }
+
+            // Escape HTML to prevent XSS
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        }
+
+        // Initialize the blog app
+        const blogApp = new BlogApp();
+    </script>
+</body>
+</html>

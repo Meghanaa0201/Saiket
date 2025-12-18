@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Saiket Systems Internship Tasks
 
 ## Student: Software Development Intern
@@ -120,3 +121,6 @@ Developed as part of the **Saiket Systems Internship Program** focusing on:
 ---
 
 *All tasks completed with original code and proper implementation.*
+=======
+# Saiket
+>>>>>>> f277e10df93a9788e2dfed29c8d6b37ea4b059c6
